@@ -227,7 +227,7 @@ def main(src,dst,protocol,port,project,network,src_tag,dst_tag,verbose, wait=Tru
 					
 					
 					
-        if implicit_allow: print ('--->Reached end of egress firewall rules. Traffic ingress to %s is implicitly allowed' % dst)
+        if implicit_allow: print ('--->Reached end of egress firewall rules. Traffic egress to %s is implicitly allowed' % dst)
         							
 
 
