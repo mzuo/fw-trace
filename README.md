@@ -15,8 +15,7 @@ This tools is implemented in python and it runs on Linux, Mac OS X and Windows, 
 
     Google Cloud Python Client API library
 
-
-If Python 2.7 is used, Python py2-ipaddress 2.0 package needs to be installed.  This is a backport of standard IP address handling package from Python version 3.3+
+    If Python 2.7 is used, Python py2-ipaddress 2.0 package needs to be installed.  This is a backport of standard IP address handling package from Python version 3.3+
 
 Please refer to Appendix “Setting Up Python Environment” for step by step instructions on how to set up the environment
 
