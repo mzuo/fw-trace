@@ -48,7 +48,9 @@ PORT
 
 
 --project
+
 [Required] Name of the project where firewall rules are configured
+
 
 --network
 
@@ -73,22 +75,22 @@ PORT
 
 ## Examples
 
-python fw-trace.py 10.0.0.1 192.168.0.1 tcp 80 --project=mzuo-nyt-vpn --network=fw-test --verbose=true
+        python fw-trace.py 10.0.0.1 192.168.0.1 tcp 80 --project=mzuo-nyt-vpn --network=fw-test --verbose=true
 
 This command traces tcp traffic on port 80 from subnet 10.0.0.0/16 to subnet 192.168.0.0/24 with the same project and network, printing out trace information in detail.
 
 
-python fw-trace.py 10.0.0.1 8.8.8.8 udp 300 --project=mzuo-nyt-vpn --network=fw-test --verbose=true --src_tag=prod
+        python fw-trace.py 10.0.0.1 8.8.8.8 udp 300 --project=mzuo-nyt-vpn --network=fw-test --verbose=true --src_tag=prod
 
 This command traces udp traffic on port 300 from an instance tagged as “prod” in subnet 10.0.0.0/16 to external IP 8.8.8.8 , printing out trace information in detail.
 
 
-python fw-trace.py 10.0.0.1 192.168.1.1 tcp 443 --project=mzuo-nyt-vpn --network=fw-test --src_tag=prod --dst_tag=qa
+        python fw-trace.py 10.0.0.1 192.168.1.1 tcp 443 --project=mzuo-nyt-vpn --network=fw-test --src_tag=prod --dst_tag=qa
 
 This command traces tcp traffic on port 80 from an instance tagged as “prod” in subnet 10.0.0.0/16 to an instance tagged as “qa” in subnet 192.168.0.0/24 with the same project and network.  In this scenario, egress firewall rules for instance “prod” and ingress firewall rules for instance “qa” will both be evaluated.
 
 
-python fw-trace.py 10.0.0.1 8.8.8.8 icmp 0 --project=mzuo-nyt-vpn --network=fw-test  --src_tag=prod 
+        python fw-trace.py 10.0.0.1 8.8.8.8 icmp 0 --project=mzuo-nyt-vpn --network=fw-test  --src_tag=prod 
 
 This command traces icmp traffic from an instance tagged as “prod” in subnet 10.0.0.0/16 to external IP 8.8.8.8
 
