@@ -1,11 +1,12 @@
 # Google Cloud Firewall Trace Tool fw-trace
-Summary
+
+## Summary
 As GCP adds new features like egress firewall rules customers’ cloud architecture will become more complex as they implement strong security policy through large sets of firewall rules.  Troubleshooting misconfiguration of firewall rules manually becomes time consuming, difficult and prone to error.
 
 The Firewall Tracer tool will enable user to find out exactly how current firewall rules permits or deny a specific traffic flow between two IPs.
 
 
-System Requirements
+## System Requirements
 This tools is implemented in python and it runs on Linux, Mac OS X and Windows, and requires the following packages and libraries:
 Python 2.7.x or Python 3.3+
 Google Cloud SDK
@@ -16,11 +17,11 @@ If Python 2.7 is used, Python py2-ipaddress 2.0 package needs to be installed.  
 Please refer to Appendix “Setting Up Python Environment” for step by step instructions on how to set up the environment
 
 
-Command Format
+## Command Format
 gcp-tracer SOURCE_IP DESTINATION_IP PROTOCOL PORT --project=PROJECT_NAME --network=NETWORK --src_tag=SRC_TAG --dst_tag=DST_TAG --verbose=true
 
 
-Parameters
+## Parameters
 SOURCE_IP
 [Required] Source IP of the traffic, e.g. 10.0.0.1
 
@@ -50,7 +51,7 @@ PORT
 [Optional] when set to “true” Print out detailed firewall tracing information.  If not used, only firewall trace results will be printed
 
 
-Examples
+## Examples
 
  python fw-trace.py 10.0.0.1 192.168.0.1 tcp 80 --project=mzuo-nyt-vpn --network=fw-test --verbose=true
 This command traces tcp traffic on port 80 from subnet 10.0.0.0/16 to subnet 192.168.0.0/24 with the same project and network, printing out trace information in detail.
@@ -66,14 +67,14 @@ This command traces icmp traffic from an instance tagged as “prod” in subnet
 
 
 
-Notes
+## Notes
 1. This tool is designed for troubleshooting firewall rules configuration and is not part of GCP feature set. 
 2. Currently there is no extensive checking of parameter formats and validity.  Please see specification and examples above for how to run the tool
 3. For questions and comments, please contact mzuo@google.com
 
 
 
-Appendix: Setting Up Python Environment
+## Appendix: Setting Up Python Environment
 1. Install Python if not already installed
     Check to see if Python is installed and which version is installed
     Python installation packages are available at https://www.python.org/downloads/  
