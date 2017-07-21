@@ -80,16 +80,6 @@ def main(src,dst,protocol,port,project,network,src_tag,dst_tag,verbose, wait=Tru
     
     print (' ')
     
-    #create list of ingress and egress firewall rules, sorted by ascending priority
-    ingress_filter = '(network eq .*%s)(direction eq INGRESS)' % (network)
-    egress_filter = '(network eq .*%s)(direction eq EGRESS)' % (network)
-        
-    ingress = compute.firewalls().list(project=project, filter=ingress_filter).execute()
-    egress = compute.firewalls().list(project=project, filter=egress_filter).execute()
-
-    ingress= {'items': sorted(ingress['items'], key=lambda x: x['priority'], reverse=False)}
-    egress = {'items': sorted(egress['items'], key=lambda x: x['priority'], reverse=False)}
-
 
     #print json.dumps(result, indent=4) 
 
@@ -114,7 +104,34 @@ def main(src,dst,protocol,port,project,network,src_tag,dst_tag,verbose, wait=Tru
     if (not egress_check) and (not ingress_check):
 		print('Neither source or destination IP belongs to network "%s", firewall rules for this network are not applicable' % network) 	
 		exit()
+    if str(verbose) <> "None":
+    	print(' ')
 		
+		
+    #create list of ingress and egress firewall rules, sorted by ascending priority
+    ingress_filter = '(network eq .*%s)(direction eq INGRESS)' % (network)
+    egress_filter = '(network eq .*%s)(direction eq EGRESS)' % (network)
+        
+    ingress = compute.firewalls().list(project=project, filter=ingress_filter).execute()
+    egress = compute.firewalls().list(project=project, filter=egress_filter).execute()
+
+    if 'items' in ingress:
+    	ingress= {'items': sorted(ingress['items'], key=lambda x: x['priority'], reverse=False)}
+    else:
+    	if ingress_check: 
+    		print ('--->No ingress firewall rules specified. Traffic ingress to %s is implicitly blocked' % dst)	
+    	ingress_check = False
+
+
+    if 'items' in egress:   
+		egress = {'items': sorted(egress['items'], key=lambda x: x['priority'], reverse=False)}
+    else:
+		if egress_check: 
+			print ('--->No egress firewall rules specified. Traffic egress to %s is implicitly allowed' % dst)
+		egress_check = False	
+
+	
+
     #print json.dumps(egress, indent=4)	
     #check egress firewall rules
     if egress_check:
